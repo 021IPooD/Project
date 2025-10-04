@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medication Alert System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="loginPage" class="container">
+    <h2>เข้าสู่ระบบ</h2>
+    <input type="email" id="loginEmail" placeholder="Email" />
+    <input type="password" id="loginPass" placeholder="Password" />
+    <button onclick="loginUser()">เข้าสู่ระบบ</button>
+    <p>ยังไม่มีบัญชี? <a href="#" onclick="showPage('registerPage')">สมัครสมาชิก</a></p>
+  </div>
+
+  <div id="registerPage" class="container hidden">
+    <h2>สมัครสมาชิก</h2>
+    <input type="email" id="regEmail" placeholder="Email" />
+    <input type="password" id="regPass" placeholder="Password" />
+    <button onclick="registerUser()">สมัครสมาชิก</button>
+    <p>มีบัญชีแล้ว? <a href="#" onclick="showPage('loginPage')">เข้าสู่ระบบ</a></p>
+  </div>
+
+  <div id="mainPage" class="container hidden">
+    <button id="logoutBtn" title="ออกจากระบบ">🚪</button>
+    <button id="unlockSound" title="เปิดใช้งานเสียง">🔓</button>
+    <h2>รายการยา</h2>
+    <button onclick="showPage('addPage')">+ เพิ่มยา</button>
+    <button id="soundToggle" onclick="toggleSound()">🔊 เปิดเสียงแจ้งเตือน</button>
+    <div id="reminderList"></div>
+  </div>
+
+
+  <div id="addPage" class="container hidden">
+  <h2>เพิ่ม/แก้ไขยา</h2>
+  <div class="input-wrapper">
+  <input type="text" id="medName" placeholder="ชื่อยา" />
+  <button type="button" class="mic-btn" onclick="startListeningInput('medName')">🎤</button>
+</div>
+
+<div class="input-wrapper">
+  <input type="text" id="dosage" placeholder="ปริมาณ เช่น 1 เม็ด" />
+  <button type="button" class="mic-btn" onclick="startListeningInput('dosage')">🎤</button>
+</div>
+
+
+<div class="input-wrapper">
+  <label for="time" class="time-label">เลือกเวลา</label>
+  <input type="time" id="time" />
+</div>
+  <button onclick="saveMedicine()">บันทึก</button>
+  <button onclick="cancelAdd()">ยกเลิก</button>
+</div>
+
+
+  <!-- Popup -->
+  <div id="popupPage" class="popup hidden">
+    <div class="popup-box">
+      <h2 id="popupText"></h2>
+      <button onclick="acknowledgePopup()">รับทราบ</button>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-compat.js"></script>
+
+
+  <!-- Script ของเรา -->
+  <script src="script.js"></script>
+</body>
+</html>
